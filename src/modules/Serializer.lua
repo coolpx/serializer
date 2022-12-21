@@ -55,7 +55,7 @@ function module:SerializeModel(model: Model)
 	
 	for _, part in pairs(model:GetDescendants()) do
 		if part:IsA("BasePart") then
-			modelString ..= serializeBasePart(part)..";"
+			modelString ..= module:SerializeBasePart(part)..";"
 		end
 	end
 	
@@ -66,7 +66,7 @@ function module:DeserializeModel(serializedData: string): Model
 	local model = Instance.new("Model")
 	
 	for _, partData in pairs(serializedData:split(";")) do
-		local part = deserializeBasePart(partData)
+		local part = module:DeserializeBasePart(partData)
 		part.Parent = model
 	end
 	
