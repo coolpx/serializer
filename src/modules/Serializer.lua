@@ -29,7 +29,7 @@ function module:SerializeBasePart(instance: BasePart): string
 			tostring(math.round(instance.Orientation.X*100)/100),
 			tostring(math.round(instance.Orientation.Y*100)/100),
 			tostring(math.round(instance.Orientation.Z*100)/100)
-		)
+        )
 	)
 end
 
