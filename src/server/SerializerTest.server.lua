@@ -11,7 +11,7 @@ for _, part in pairs(workspace.Serialize:GetChildren()) do
 		part:Destroy()
 		serializer:DeserializeBasePart(serialized).Parent = workspace.Deserialized
 	elseif part:IsA("Model") or part:IsA("Folder") then
-		local serialized = serializer:DeserializeModel(part)
+		local serialized = serializer:SerializeModel(part)
 		print(serialized)
 		part:Destroy()
 		serializer:DeserializeModel(serialized).Parent = workspace.Deserialized
