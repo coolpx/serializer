@@ -2,9 +2,10 @@ local module = {}
 
 function module:SerializeBasePart(instance: BasePart): string
 	return string.format(
-		"%s:%s:%s:%s:%s:%s",
+		"%s:%s:%s:%s:%s:%s:%s",
 		instance.ClassName,
 		tostring(instance.Material):split(".")[3],
+        tostring(math.round(instance.Transparency*100)/100),
 		string.format(
 			"%s/%s/%s",
 			tostring(math.round(instance.Color.R*255)),
@@ -34,14 +35,15 @@ end
 
 function module:DeserializeBasePart(serializedData: string): BasePart
 	local data = serializedData:split(":")
-	local colorData = data[3]:split("/")
-	local posData = data[4]:split("/")
-	local sizeData = data[5]:split("/")
-	local rotData = data[6]:split("/")
+	local colorData = data[4]:split("/")
+	local posData = data[5]:split("/")
+	local sizeData = data[6]:split("/")
+	local rotData = data[7]:split("/")
 	
 	local part = Instance.new(data[1])
 	part.Anchored = true
 	part.Material = Enum.Material[data[2]]
+    part.Transparency = tonumber(data[3])
 	part.Color = Color3.new(tonumber(colorData[1])/255, tonumber(colorData[2])/255, tonumber(colorData[3])/255)
 	part.Position = Vector3.new(tonumber(posData[1]), tonumber(posData[2]), tonumber(posData[3]))
 	part.Size = Vector3.new(tonumber(sizeData[1]), tonumber(sizeData[2]), tonumber(sizeData[3]))
